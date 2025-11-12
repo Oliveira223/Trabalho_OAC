@@ -1,4 +1,3 @@
-
 //8 lines
 //block size = 8 words (32 bytes)
 //write-through, no write-allocate
