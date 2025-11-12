@@ -202,14 +202,11 @@ architecture cpu_tb of cpu_tb is
 		   
     signal readInst: std_logic;
     
-    -- Contador de tempo de execução
-    signal cycle_count: integer := 0;
-    signal exec_time_ns: real := 0.0;
-    signal execution_active: std_logic := '0';  -- indica se a execução está ativa
-    signal first_invalid: std_logic := '0';     -- marca primeira instrução inválida
-    
     file ARQ : TEXT open READ_MODE is "Test_Program_Allinst_MIPS_MCS.txt";
- 
+    file ARQ : TEXT open READ_MODE is "../src/assemblies/";
+    file ARQ : TEXT open READ_MODE is "../src/assemblies/";
+    file ARQ : TEXT open READ_MODE is "../src/assemblies/";
+   
 begin
            
     Data_mem:  entity work.RAM_mem 
@@ -284,80 +281,6 @@ begin
         wait for 20 ns;
     end process;
 
-    ----------------------------------------------------------------------------
-    -- Contador de ciclos de clock e tempo de execução
-    ----------------------------------------------------------------------------
-    process(ck, rstCPU)
-    begin
-        if rstCPU = '1' then
-            cycle_count <= 0;
-            exec_time_ns <= 0.0;
-            execution_active <= '0';
-            first_invalid <= '0';
-        elsif rising_edge(ck) then
-            -- Inicia contagem após o reset
-            if execution_active = '0' then
-                execution_active <= '1';
-                report "========================================";
-                report "INICIANDO CONTAGEM DE TEMPO DE EXECUCAO";
-                report "========================================";
-            end if;
-            
-            cycle_count <= cycle_count + 1;
-            exec_time_ns <= real(cycle_count + 1) * 20.0; -- período de clock = 20 ns
-            
-            -- Exibe o tempo a cada 1000 ciclos
-            if (cycle_count + 1) mod 1000 = 0 then
-                report "Ciclos: " & integer'image(cycle_count + 1) & 
-                       " | Tempo: " & real'image(exec_time_ns) & " ns";
-            end if;
-        end if;
-    end process;
-    
-    -- Processo para detectar fim da execução (instrução inválida)
-    process
-        variable last_valid_cycle: integer := 0;
-        variable last_valid_time: real := 0.0;
-        variable exec_time_us: real := 0.0;
-        variable exec_time_ms: real := 0.0;
-        variable exec_time_s: real := 0.0;
-    begin
-        wait until rstCPU = '0';  -- espera o processador iniciar
-        wait for 200 ns;           -- aguarda estabilização
-        
-        -- Loop principal de monitoramento
-        loop
-            wait until rising_edge(ck);
-            
-            -- Salva o último estado válido
-            if execution_active = '1' then
-                last_valid_cycle := cycle_count;
-                last_valid_time := exec_time_ns;
-            end if;
-            
-            -- Se passou muito tempo desde última atualização, considera fim
-            wait for 1 us;
-            if cycle_count = last_valid_cycle then
-                -- Nenhum ciclo novo, pode ter terminado
-                -- Calcula tempo em diferentes unidades
-                exec_time_us := last_valid_time / 1000.0;
-                exec_time_ms := exec_time_us / 1000.0;
-                exec_time_s := exec_time_ms / 1000.0;
-                
-                report "========================================";
-                report "     RESUMO DA EXECUCAO";
-                report "========================================";
-                report "Total de ciclos: " & integer'image(last_valid_cycle);
-                report "Tempo total (ns): " & real'image(last_valid_time) & " ns";
-                report "Tempo total (us): " & real'image(exec_time_us) & " us";
-                report "Tempo total (ms): " & real'image(exec_time_ms) & " ms";
-                report "Tempo total (s):  " & real'image(exec_time_s) & " s";
-                report "========================================";
-                exit;
-            end if;
-        end loop;
-    end process;
-
     
     ----------------------------------------------------------------------------
     -- Este processo carrega a mem�ria de instru��es e a mem�ria de dados
@@ -403,7 +326,7 @@ begin
                address_flag := 0;       -- para INSTRU��ES  um par (end,inst)
                                         -- para DADOS aceita (end dado 0 dado 1 dado 2 ....)
                loop                                     
-                  if line_arq(i) = '0' and line_arq(i+1) = 'x' then -- encontrou indica�� de n�mero  hexa: '0x'
+                  if line_arq(i) = '0' and line_arq(i+1) = 'x' then -- encontrou indica�� de n�mero hexa: '0x'
                          i := i + 2;
                          if address_flag=0 then
                                for w in 0 to 7 loop

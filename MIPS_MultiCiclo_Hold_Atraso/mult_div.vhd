@@ -1,28 +1,28 @@
 -------------------------------------------------------------------------
---  MULTIPLICAï¿½ï¿½O POR SOMAS SUCESSIVAS E DIVISï¿½O POR SUBTRAï¿½ï¿½ES SUCESSIVAS
+--  MULTIPLICAÇÃO POR SOMAS SUCESSIVAS E DIVISÃO POR SUBTRAÇÕES SUCESSIVAS
 --
 --	Multiplicador:
 --  	Mcando, Mcador		- Multiplicando e Multiplicador, de N bits
---  	start, endop 		- Inï¿½cio e fim da operaï¿½ï¿½o de multiplicaï¿½ï¿½o
+--  	start, endop 		- Início e fim da operação de multiplicação
 --  	produto      		- Resultado, com 2N bits
 --
 --	Divisor:
 --  	dividendo,divisor	- Dividendo e Divisor, de N bits
---  	start, endop 		- Inï¿½cio e fim de operaï¿½ï¿½o de divisï¿½o
+--  	start, endop 		- Início e fim de operação de divisão
 --  	quociente,resto		- Resultados, cada um com N bits
 --
---  05/07/2018 (Ney) - Inicializaï¿½ï¿½o de sinais
+--  05/07/2018 (Ney) - Inicialização de sinais
 --			externos, para evitar que fiquem indefinidos
 --  16/06/2020 (Ney) - Bugs corrigidos
---			Mudada a lï¿½gica interna do multiplicador e do divisor para 
---			viabilizar resetï¿½-los junto com o reset de processador externo.
+--			Mudada a lógica interna do multiplicador e do divisor para 
+--			viabilizar resetá-los junto com o reset de processador externo.
 --			Isto exigiu inicializar os registradores RegP e RegB em ambos
---			mï¿½dulos apenas ao sair do estado inicializa e nï¿½o ao entrar 
+--			módulos apenas ao sair do estado inicializa e não ao entrar 
 --			neste.  			
 -------------------------------------------------------------------------
 
 -----------------------------------------------------------------------
---  Mï¿½DULO DE MULTIPLICAï¿½ï¿½O
+--  MÓDULO DE MULTIPLICAÇÃO
 -----------------------------------------------------------------------
 library IEEE;
 use IEEE.Std_Logic_1164.all;
@@ -49,13 +49,13 @@ architecture multiplica of multiplica is
 begin      
    
    --
-   -- registradores regP, regB, produto, endop e contador de execuï¿½ï¿½o
+   -- registradores regP, regB, produto, endop e contador de execução
    --
    process(start, clock)
    begin    
      if (start='0' and EA=inicializa) then 
-			-- Inicializa-se os registradores na saï¿½da do estado
-			-- e nï¿½o na entrada
+			-- Inicializa-se os registradores na saída do estado
+			-- e não na entrada
          regP( N*2 downto N) <= (others=>'0');
          regP( N-1 downto 0) <= Mcador;         
          regB	<= '0' & Mcando;
@@ -82,7 +82,7 @@ begin
      end if;       
    end process;
 
-   -- Mï¿½quina de Estados para controlar a multiplicaï¿½ï¿½o
+   -- Máquina de Estados para controlar a multiplicação
    process (start, clock)
    begin
      if start='1' then
@@ -98,7 +98,7 @@ begin
                                     else 
                                          EA <= calc;  
                                     end if;             
-				-- estado termina sï¿½ serve para gerar o pulso em endop  
+				-- estado termina só serve para gerar o pulso em endop  
                 when termina   =>   EA <= fim;      
                 
                 when fim       =>   EA <= fim;    
@@ -110,7 +110,7 @@ begin
 end multiplica;   
 
 -----------------------------------------------------------------------
---  Mï¿½DULO DE DIVISï¿½O
+--  MÓDULO DE DIVISÃO
 -----------------------------------------------------------------------
 library IEEE;
 use IEEE.Std_Logic_1164.all;
@@ -142,8 +142,8 @@ begin
    process(start, clock)
    begin    
      if (start='0' and EA=inicializa) then
-			-- Inicializa-se os registradores na saï¿½da do estado
-			-- e nï¿½o na entrada
+			-- Inicializa-se os registradores na saída do estado
+			-- e não na entrada
 		regP(N*2 downto N) <= (others=>'0');
 		regP(N-1 downto 0) <= dividendo;
 		regB  <= '0' & divisor;
@@ -181,7 +181,7 @@ begin
         end if;       
     end process;
  
-   -- Mï¿½quina de Estados para controlar a divisï¿½o
+   -- Máquina de Estados para controlar a divisão
    process (start, clock)
       begin
        if start='1'then
@@ -198,7 +198,7 @@ begin
                                        EA <= desloca;  
                                     end if;
                                     
-				-- estado termina sï¿½ serve para gerar o pulso em endop  
+				-- estado termina só serve para gerar o pulso em endop  
                 when termina   =>   EA <= fim;  
                 
                 when fim       =>   EA <= fim;    

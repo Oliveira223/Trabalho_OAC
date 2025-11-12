@@ -1,76 +1,76 @@
 -------------------------------------------------------------------------
 --
--- I M P L E M E N T A ï¿½ ï¿½ O   P A R C I A L  D O  M I P S (junho/2020)
+-- I M P L E M E N T A Ç Ã O   P A R C I A L  D O  M I P S (junho/2020)
 -- MIPS_S
 --  Professores     Fernando Moraes / Ney Calazans
 --
---  ==> A entidade de nï¿½vel mais alto denomina-se MIPS_S
+--  ==> A entidade de nível mais alto denomina-se MIPS_S
 --  21/06/2010 (Ney) - Bug corrigido no mux que gera op1 - agora recebe
---		NPC e nï¿½o mais o pc.
+--		NPC e não mais o pc.
 --  17/11/2010 (Ney) - Bugs corrigidos:
---		1 - Decodificaï¿½ï¿½o das instruï¿½ï¿½es BGEZ e BLEZ estava 
+--		1 - Decodificação das instruções BGEZ e BLEZ estava 
 --		incompleta
---		2 - Definiï¿½ï¿½o de que linhas escolhem o registrador a
---		ser escrito nas instruï¿½ï¿½es de deslocamento 
+--		2 - Definição de que linhas escolhem o registrador a
+--		ser escrito nas instruções de deslocamento 
 --		(SSLL, SLLV, SSRA, SRAV, SSRL e SRLV)
---  05/06/2012 (Ney) - Mudanï¿½as menores em nomenclatura
---  19/11/2015 (Ney) - Mudanï¿½a para MIPS-MC Single Clock Edge
---			Alï¿½m das mudanï¿½as ï¿½bvias de sensibilidade de elementos de 
---			memï¿½ria para somente borda de subida, tambem mudou-se o
+--  05/06/2012 (Ney) - Mudanças menores em nomenclatura
+--  19/11/2015 (Ney) - Mudança para MIPS-MC Single Clock Edge
+--			Além das mudanças óbvias de sensibilidade de elementos de 
+--			memória para somente borda de subida, tambem mudou-se o
 --			ponto de onde as entradas de dados do multiplicador e do
---			divisor provï¿½m, agora direto da saï¿½da do banco de 
---			registradores e nï¿½o mais de R1 e R2. Ainda, mudou-se a
+--			divisor provém, agora direto da saída do banco de 
+--			registradores e não mais de R1 e R2. Ainda, mudou-se a
 --			estrutura dos blocos de dados e controle. O Bloco
---			de Controle agora contï¿½m o PC, o NPC e o IR e,
---			naturalmente a interface com a memï¿½ria de instruï¿½ï¿½es.
---			Foi tambï¿½m eliminado o estado Sidle, por desnecessï¿½rio.
---  04/07/2016 (Ney) - Diversas revisï¿½es em nomes de sinais para 
---			aumentar a intuitividade da descriï¿½ï¿½o, mudanï¿½a do
---			nome do processador para MIPS_S (ver documentaï¿½ï¿½o, versï¿½o 2.0
+--			de Controle agora contém o PC, o NPC e o IR e,
+--			naturalmente a interface com a memória de instruções.
+--			Foi também eliminado o estado Sidle, por desnecessário.
+--  04/07/2016 (Ney) - Diversas revisões em nomes de sinais para 
+--			aumentar a intuitividade da descrição, mudança do
+--			nome do processador para MIPS_S (ver documentação, versão 2.0
 --			ou superior).
---  05/08/2016 (Ney) - Correï¿½ï¿½o e adaptaï¿½ï¿½o dos nomes de sinais e
+--  05/08/2016 (Ney) - Correção e adaptação dos nomes de sinais e
 --			blocos para facilitar aprendizado. Processador agora se chama
 --			MIPS_MCS (MIPS Multi-Ciclo Single Edge)
---  05/07/2018 (Ney) - Correï¿½ï¿½o e adaptaï¿½ï¿½o dos nomes de sinais para 
+--  05/07/2018 (Ney) - Correção e adaptação dos nomes de sinais para 
 --			facilitar o aprendizado.
---  13/12/2018 (Ney) - Eliminada qualquer menï¿½ï¿½o a um registrador
---			temporï¿½rio IMED (para deixar a descriï¿½ï¿½o coerente)
+--  13/12/2018 (Ney) - Eliminada qualquer menção a um registrador
+--			temporário IMED (para deixar a descrição coerente)
 --  11/12/2019 (Ney) - Bugs corrigidos:
---			Corrigido um erro no MUX M6 que nï¿½o se manifestou jamais antes,
+--			Corrigido um erro no MUX M6 que não se manifestou jamais antes,
 --			pois usamos somente enderecos de salto onde os bits 
 --			25-21=00000. O erro era deixar passar R1 para a entrada op1
---			da ALU quando se estï¿½ calculando o endereï¿½o de salto para 
---			J e JAL, e nï¿½o o NPC, que ï¿½ o certo.
+--			da ALU quando se está calculando o endereço de salto para 
+--			J e JAL, e não o NPC, que é o certo.
 --  16/06/2020 (Ney) - Bugs corrigidos:
 --			Devido a falhas no multiplicador/divisor. Por algum motivo, 
---			entre a versï¿½o anterior	e a de 19/11/2015, as entradas do 
---			multiplicador/divisor voltaram a estar conectadas as saï¿½das de
---			R1 e R2. Agora isto foi desfeito. Outra alteraï¿½ï¿½o foi mudar a
---			lï¿½gica interna do multiplicador e do divisor para viabilizar 
---			resetï¿½-los junto com o processador. Isto exigiu inicializar os
---			registradores RegP e RegB em ambos os mï¿½dulos apenas ao sair do
---			estado inicializa e nï¿½o ao entrar neste. Depois desta 
---			modificaï¿½ï¿½o ficou simples tornar o sinal rst dos mï¿½dulos um
+--			entre a versão anterior	e a de 19/11/2015, as entradas do 
+--			multiplicador/divisor voltaram a estar conectadas as saídas de
+--			R1 e R2. Agora isto foi desfeito. Outra alteração foi mudar a
+--			lógica interna do multiplicador e do divisor para viabilizar 
+--			resetá-los junto com o processador. Isto exigiu inicializar os
+--			registradores RegP e RegB em ambos os módulos apenas ao sair do
+--			estado inicializa e não ao entrar neste. Depois desta 
+--			modificação ficou simples tornar o sinal rst dos módulos um
 --			OR do sinal rst do processador e de uins.rst_md. O novo sinal
 --			criado se chama rst_muldiv.
---	29/09/2021 (Ney) - Comentï¿½rios revisados, resolvendo questï¿½es de 
---			grafia e acentuaï¿½ï¿½o possï¿½veis de serem considerados em Sw tal 
+--	29/09/2021 (Ney) - Comentários revisados, resolvendo questões de 
+--			grafia e acentuação possíveis de serem considerados em Sw tal 
 --			como o Vivado.
---	20/10/2021 (Ney) - Comentï¿½rios revisados, rï¿½tulos acrescentados e nome
---			regnbits trocado para reg32bit. Por coerï¿½ncia o processador
---          ï¿½ agora denominado MIPS_S em todos os lugares, mudando-se 
---          atï¿½ mesmo o nome do package para p_MIPS_S.
+--	20/10/2021 (Ney) - Comentários revisados, rótulos acrescentados e nome
+--			regnbits trocado para reg32bit. Por coerência o processador
+--          é agora denominado MIPS_S em todos os lugares, mudando-se 
+--          até mesmo o nome do package para p_MIPS_S.
 -------------------------------------------------------------------------
 
 --++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
--- package com os tipos bï¿½sicos auxiliares para descrever o processador
+-- package com os tipos básicos auxiliares para descrever o processador
 --++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 library IEEE;
 use IEEE.Std_Logic_1164.all;
 
 package p_MIPS_S is  
     
-    -- inst_type define as instruï¿½ï¿½es decodificï¿½veis pelo bloco de controle
+    -- inst_type define as instruções decodificáveis pelo bloco de controle
     type inst_type is  
             ( ADDU, SUBU, AAND, OOR, XXOR, NNOR, SSLL, SLLV, SSRA, SRAV,
 				SSRL, SRLV,ADDIU, ANDI, ORI, XORI, LUI, LBU, LW, SB, SW, SLT,
@@ -78,26 +78,26 @@ package p_MIPS_S is
 				MULTU, DIVU, MFHI, MFLO, invalid_instruction);
  
     type microinstruction is record
-            CY1:   std_logic;       -- identificador de primeiro ciclo da instruï¿½ï¿½o
-            CY2:   std_logic;       -- identificador de segundo ciclo da instruï¿½ï¿½o
-            walu:  std_logic;       -- identificador de terceiro ciclo da instruï¿½ï¿½o
-            wmdr:  std_logic;       -- identificador de quarto ciclo da instruï¿½ï¿½o
-            wpc:   std_logic;       -- habilitaï¿½ï¿½o de escrita no PC
-            wreg:  std_logic;       -- habilitaï¿½ï¿½o de escrita no Banco de Registradores
-            whilo: std_logic;       -- habilitaï¿½ï¿½o de escrita nos registradores HI e LO
+            CY1:   std_logic;       -- identificador de primeiro ciclo da instrução
+            CY2:   std_logic;       -- identificador de segundo ciclo da instrução
+            walu:  std_logic;       -- identificador de terceiro ciclo da instrução
+            wmdr:  std_logic;       -- identificador de quarto ciclo da instrução
+            wpc:   std_logic;       -- habilitação de escrita no PC
+            wreg:  std_logic;       -- habilitação de escrita no Banco de Registradores
+            whilo: std_logic;       -- habilitação de escrita nos registradores HI e LO
             ce:    std_logic;       -- chip enable e controle de escrita/leitura
             rw:    std_logic;
             bw:    std_logic;       -- controle de escrita a byte
-            i:     inst_type;       -- cï¿½digo que especifica a instruï¿½ï¿½o sob execuï¿½ï¿½o
-            rst_md:std_logic;       -- inicializaï¿½ï¿½o do multiplicador e do divisor
+            i:     inst_type;       -- código que especifica a instrução sob execução
+            rst_md:std_logic;       -- inicialização do multiplicador e do divisor
     end record;
          
 end p_MIPS_S;
 
 
 --++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
--- Registrador de uso geral de 32 bits - sensï¿½vel ï¿½ borda de subida do
--- relï¿½gio (ck), com reset assï¿½ncrono (rst) e habilitaï¿½ï¿½o de escrita (ce)
+-- Registrador de uso geral de 32 bits - sensível à  borda de subida do
+-- relógio (ck), com reset assíncrono (rst) e habilitação de escrita (ce)
 --++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 library IEEE;
 use IEEE.std_logic_1164.all;
@@ -128,15 +128,15 @@ end reg32bit;
 
 --++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 -- Banco de Registradores  (R0..R31) - 31 registradores de 32 bits
--- 	Trata-se de uma memï¿½ria com trï¿½s portas de acesso, nï¿½o confundir
---		com a memï¿½ria principal do processador. 
---		Sï¿½o duas portas de leitura (sinais AdRP1+DataRP1 e AdRP2+DataRP2) e
+-- 	Trata-se de uma memória com trás portas de acesso, não confundir
+--		com a memória principal do processador. 
+--		São duas portas de leitura (sinais AdRP1+DataRP1 e AdRP2+DataRP2) e
 --		uma porta de escrita (controlada pelo conjunto de sinais ck, rst,
 --		ce, AdWP e DataWP).
---		Os endereï¿½os de cada porta (AdRP1, AdRP2 e AdWP) sï¿½o obviamente de
---		5 bits (pois 2^5=32 e precisamos de um endereï¿½o distinto para
+--		Os endereços de cada porta (AdRP1, AdRP2 e AdWP) são obviamente de
+--		5 bits (pois 2^5=32 e precisamos de um endereço distinto para
 --		cada um dos 32 registradores), enquanto que os barramentos de dados de 
---		saï¿½da (DataRP1, DataRP2) e de entrada (DataWP) sï¿½o de 32 bits.
+--		saída (DataRP1, DataRP2) e de entrada (DataWP) são de 32 bits.
 --++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 library IEEE;
 use IEEE.Std_Logic_1164.all;
@@ -158,17 +158,17 @@ architecture reg_bank of reg_bank is
 begin            
     g1: for i in 0 to 31 generate        
 
-        -- Lembrar que o registrador $0 ($zero) ï¿½ a constante 0, nï¿½o um registrador.
-        -- Ele ï¿½ descrito como um registrador cujo ce nunca ï¿½ ativado
-		-- O sinal wen ï¿½ o vetor sinais de controle de habilitaï¿½ï¿½o de escrita em cada
-		-- um dos 32 registradores: wen(0) ï¿½ a habilitaï¿½ï¿½o de escrita no registrador 0
+        -- Lembrar que o registrador $0 ($zero) é a constante 0, não um registrador.
+        -- Ele é descrito como um registrador cujo ce nunca é ativado
+		-- O sinal wen é o vetor sinais de controle de habilitação de escrita em cada
+		-- um dos 32 registradores: wen(0) é a habilitação de escrita no registrador 0
 		-- (como dito acima, wen(0)='0', sempre. Os demais dependem do valor de AdWP
 		-- o do ce global.
         wen(i) <= '1' when i/=0 and AdWP=i and ce='1' else '0';
          
-        -- Lembrar que o registrador $29, por convenï¿½ï¿½o de software ï¿½ o apontador de
+        -- Lembrar que o registrador $29, por convenção de software é o apontador de
 		-- pilha. Ele aponta inicialmente para um lugar diferente do valor usado no MARS.
-		-- A pilha aqui ï¿½ pensada como usando a parte final da memï¿½ria de dados
+		-- A pilha aqui é pensada como usando a parte final da memória de dados
         g2: if i=29 generate -- SP ---  x10010000 + x800 -- local do topo da pilha
            r29: entity work.reg32bit generic map(INIT_VALUE=>x"10010800")    
                 port map(ck=>ck, rst=>rst, ce=>wen(i), D=>DataWP, Q=>reg(i));
@@ -182,20 +182,20 @@ begin
    end generate g1;   
     
 
-    DataRP1 <= reg(CONV_INTEGER(AdRP1));    -- seleï¿½ï¿½o do fonte 1 
+    DataRP1 <= reg(CONV_INTEGER(AdRP1));    -- seleção do fonte 1 
 
-    DataRP2 <= reg(CONV_INTEGER(AdRP2));    -- seleï¿½ï¿½o do fonte 2 
+    DataRP2 <= reg(CONV_INTEGER(AdRP2));    -- seleção do fonte 2 
    
 end reg_bank;
 
 --++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
--- ALU - Uma unidade lï¿½gico-aritmï¿½tica puramente combinacional, cuja 
---		saï¿½da depende dos valores nas suas entradas de dados op1 e op2, cada
---		uma de 32 bits e da instruï¿½ï¿½o sendo executada pelo processador,
---		que ï¿½ informada via o sinal de controle op_alu.
+-- ALU - Uma unidade lógico-aritmética puramente combinacional, cuja 
+--		saída depende dos valores nas suas entradas de dados op1 e op2, cada
+--		uma de 32 bits e da instrução sendo executada pelo processador,
+--		que é informada via o sinal de controle op_alu.
 --
--- 22/11/2004 (Ney Calazans) - correï¿½ï¿½o de um erro sutil para a instruï¿½ï¿½o J
--- Lembrar que parte do trabalho para a J (cï¿½lculo de endereï¿½o) jï¿½ foi
+-- 22/11/2004 (Ney Calazans) - correção de um erro sutil para a instrução J
+-- Lembrar que parte do trabalho para a J (cálculo de endereço) já foi
 -- iniciado antes, deslocando IR(25 downto 0) para a esquerda em 2 bits
 -- antes de escrever dados no registrador R3.
 --
@@ -217,8 +217,8 @@ architecture alu of alu is
    signal menorU, menorS : std_logic ;
 begin
   
-    menorU <=  '1' when op1 < op2 else '0'; -- comparaï¿½ï¿½o de naturais
-    menorS <=  '1' when ieee.Std_Logic_signed."<"(op1,  op2) else '0' ; -- comparaï¿½ï¿½o de inteiros
+    menorU <=  '1' when op1 < op2 else '0'; -- comparação de naturais
+    menorS <=  '1' when ieee.Std_Logic_signed."<"(op1,  op2) else '0' ; -- comparação de inteiros
     
     outalu <=  
 		op1 - op2                            when  op_alu=SUBU                     else
@@ -249,13 +249,13 @@ end alu;
 
 --++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 --++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
--- Descriï¿½ï¿½o Estrutural do Bloco de Dados 
+-- Descrição Estrutural do Bloco de Dados 
 --++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 --++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 library IEEE;
 use IEEE.Std_Logic_1164.all;
-use IEEE.Std_Logic_signed.all; -- necessï¿½rio para as instruï¿½ï¿½es SLTx
-use IEEE.Std_Logic_arith.all;  -- necessï¿½rio para as instruï¿½ï¿½es SLTxU
+use IEEE.Std_Logic_signed.all; -- necessário para as instruções SLTx
+use IEEE.Std_Logic_arith.all;  -- necessário para as instruções SLTxU
 use work.p_MIPS_S.all;
    
 entity datapath is
@@ -287,20 +287,20 @@ begin
 					'0';
 	inst_branch_out <= inst_branch;
    
-	-- inst_R_sub ï¿½ um subconjunto das instruï¿½ï¿½es tipo R 
+	-- inst_R_sub é um subconjunto das instruções tipo R 
 	inst_R_sub  <= 	'1' when uins.i=ADDU or uins.i=SUBU or uins.i=AAND
 							or uins.i=OOR or uins.i=XXOR or uins.i=NNOR else
 					'0';
 
-	-- inst_I_sub ï¿½ um subconjunto das instruï¿½ï¿½es tipo I
+	-- inst_I_sub é um subconjunto das instruções tipo I
 	inst_I_sub  <= '1' when uins.i=ADDIU or uins.i=ANDI or uins.i=ORI or uins.i=XORI else
                    '0';
 
 	--==============================================================================
-	-- segundo estï¿½gio
+	-- segundo estágio
 	--==============================================================================
                 
-	-- A clï¿½usula "then" aqui sï¿½ ï¿½ usada para deslocamentos com um campo "shamt"       
+	-- A cláusula "then" aqui só é usada para deslocamentos com um campo "shamt"       
 	M3: adS <=	IR_IN(20 downto 16) when uins.i=SSLL or uins.i=SSRA or uins.i=SSRL else 
 				IR_IN(25 downto 21);
           
@@ -308,21 +308,21 @@ begin
 					(AdRP1=>adS, DataRP1=>R1_in, AdRP2=>IR_IN(20 downto 16), 
 					DataRP2=>R2_in, ck=>ck, rst=>rst, ce=>uins.wreg, AdWP=>adD, DataWP=>RIN);
     
-	-- extensï¿½o de sinal  
+	-- extensão de sinal  
 	sign_extend <=  x"FFFF" & IR_IN(15 downto 0) when IR_IN(15)='1' else
 					x"0000" & IR_IN(15 downto 0);
     
-	-- Cï¿½lculo da constante imediata - extensï¿½es e mux M5
+	-- Cálculo da constante imediata - extensões e mux M5
 	M5: R3_in <= 	sign_extend(29 downto 0)  & "00"     when inst_branch='1' else
-					-- ajusta o endereï¿½o de salto para uma fronteira mï¿½ltiplo de palavra
+					-- ajusta o endereço de salto para uma fronteira múltiplo de palavra
 					"0000" & IR_IN(25 downto 0) & "00" when uins.i=J or uins.i=JAL else
-					-- J/JAL sï¿½o endereï¿½adas a palavra. Os 4 bits menos significativos sï¿½o definidos
-					-- na ALU, nï¿½o aqui!!
-					x"0000" & IR_IN(15 downto 0) when uins.i=ANDI or uins.i=ORI  or uins.i=XORI else					-- instruï¿½ï¿½es lï¿½gicas com operando imediatao usam extensï¿½o de 0 para calcular este
+					-- J/JAL são endereçadas a palavra. Os 4 bits menos significativos são definidos
+					-- na ALU, não aqui!!
+					x"0000" & IR_IN(15 downto 0) when uins.i=ANDI or uins.i=ORI  or uins.i=XORI else					-- instruções lógicas com operando imediatao usam extensão de 0 para calcular este
 					sign_extend;
-					-- O caso "default" (extensï¿½o de sinal) ï¿½ usado por addiu, lbu, lw, sbu e sw
+					-- O caso "default" (extensão de sinal) é usado por addiu, lbu, lw, sbu e sw
              
-	-- registradores do segundo estï¿½gio 
+	-- registradores do segundo estágio 
 	R1reg:  entity work.reg32bit port map(ck=>ck, rst=>rst, ce=>uins.CY2, D=>R1_in, Q=>R1);
 
 	R2reg:  entity work.reg32bit port map(ck=>ck, rst=>rst, ce=>uins.CY2, D=>R2_in, Q=>R2);
@@ -331,7 +331,7 @@ begin
  
  
 	--==============================================================================
-	-- terceiro estï¿½gio
+	-- terceiro estágio
 	--==============================================================================
                       
 	-- seleciona o primeiro operando da ALU
@@ -342,24 +342,24 @@ begin
                   or uins.i=SLLV or uins.i=SRAV or uins.i=SRLV else 
 		R3; 
                  
-	-- instanciaï¿½ï¿½o da ALU
+	-- instanciação da ALU
 	DALU: entity work.alu port map (op1=>op1, op2=>op2, outalu=>outalu, op_alu=>uins.i);
    
-	-- registrador na saï¿½da da ALU
+	-- registrador na saída da ALU
 	ALUreg: entity work.reg32bit  port map(ck=>ck, rst=>rst, ce=>uins.walu, 
 				D=>outalu, Q=>RALU);               
  
-	-- Avliaï¿½ï¿½o das condiï¿½ï¿½es para executar saltos em "branchs"
+	-- Avliação das condições para executar saltos em "branchs"
 	salta <=	'1' when ( (R1=R2  and uins.i=BEQ)  or (R1>=0  and uins.i=BGEZ) or
                         (R1<=0  and uins.i=BLEZ) or (R1/=R2 and uins.i=BNE) )  else
 				'0';
 	salta_out <= salta;
 	
-	-- reset do multiplicador e do divisor; pode ser via reset global (rst) ou antes do inï¿½cio da
-	-- instruï¿½ï¿½o multu/divu
+	-- reset do multiplicador e do divisor; pode ser via reset global (rst) ou antes do início da
+	-- instrução multu/divu
 	rst_muldiv <= rst or uins.rst_md; 
 	
-	-- instanciaï¿½ï¿½o do multiplicador e do divisor
+	-- instanciação do multiplicador e do divisor
 	inst_mult: entity work.multiplica port map (Mcando=>R1_in, Mcador=>R2_in, clock=>ck,
 	  start=>rst_muldiv, endop=>end_mul, produto=>produto);
 	  
@@ -377,17 +377,17 @@ begin
 			D=>D_Lo, Q=>LO);               
 
    --==============================================================================
-   -- quarto estï¿½gio
+   -- quarto estágio
    --==============================================================================
      
    d_address <= RALU;
     
-   -- tristate para controlar a escrita na memï¿½ria    
+   -- tristate para controlar a escrita na memória    
    data <= R2 when (uins.ce='1' and uins.rw='0') else (others=>'Z');  
 
-   -- mux M8 escolhe entre passar 32 bits da memï¿½ria para dentro do processador
-   -- ou passar apenas o byte menos significativo com 24 bits de extensï¿½o de 0. 
-   -- assume-se aqui como em todos os lugares, que o processador ï¿½ "little endian"
+   -- mux M8 escolhe entre passar 32 bits da memória para dentro do processador
+   -- ou passar apenas o byte menos significativo com 24 bits de extensão de 0. 
+   -- assume-se aqui como em todos os lugares, que o processador é "little endian"
    M8: mdr_int <= data when uins.i=LW  else
               x"000000" & data(7 downto 0);
        
@@ -400,13 +400,13 @@ begin
                     RALU;
 
    --==============================================================================
-   -- quinto estï¿½gio
+   -- quinto estágio
    --==============================================================================
 
    -- M2 escolhe o sinal com o dado a ser escrito no banco de registradores
    M2: RIN <= NPC_IN when (uins.i=JALR or uins.i=JAL) else result;
    
-   -- M4 seleciona o endereï¿½o de escrita no banco de registradores 
+   -- M4 seleciona o endereço de escrita no banco de registradores 
    M4: adD <= "11111" when uins.i=JAL else -- JAL escreve sempre no registrador $31
          IR_IN(15 downto 11) when (inst_R_sub='1' 
 					or uins.i=SLTU or uins.i=SLT
@@ -424,7 +424,7 @@ end datapath;
 
 --------------------------------------------------------------------------
 --------------------------------------------------------------------------
---  Descriï¿½ï¿½o do Bloco de Controle (mista, estrutural-comportamental)
+--  Descrição do Bloco de Controle (mista, estrutural-comportamental)
 --------------------------------------------------------------------------
 --------------------------------------------------------------------------
 library IEEE;
@@ -450,14 +450,14 @@ end control_unit;
                    
 architecture control_unit of control_unit is
 	type type_state is (Sfetch, Sreg, Salu, Swbk, Sld, Sst, Ssalta); -- 7 estados 
-	signal PS, NS : type_state; -- PS = estado atual; NS = prï¿½ximo estado
+	signal PS, NS : type_state; -- PS = estado atual; NS = próximo estado
 	signal i : inst_type;
 	signal uins_int : microinstruction;
 	signal dtpc, NPC, pc, incpc, IR  : std_logic_vector(31 downto 0);
 begin
     ----------------------------------------------------------------------------------------
     -- BLOCO (1 de 4) - Os registradores de controle da MIPS_S.
-	-- Busca de instruï¿½ï¿½o e incremento do PC
+	-- Busca de instrução e incremento do PC
     ----------------------------------------------------------------------------------------
 	-- M1 seleciona a entrada do registrador PC 
 	M1: dtpc <=	RESULT_IN when (inst_branch_in='1' and salta_in='1') or uins_int.i=J
@@ -466,8 +466,8 @@ begin
    
 	NPC_OUT <= NPC;
 	
-	-- Endereï¿½o de partida onde estï¿½ armazenado o programa: cuidado com este valor!
-	-- O valor abaixo (x"00400000") serve para cï¿½digo gerado pelo simulador MARS
+	-- Endereço de partida onde está armazenado o programa: cuidado com este valor!
+	-- O valor abaixo (x"00400000") serve para código gerado pelo simulador MARS
 	PC_reg: entity work.reg32bit generic map(INIT_VALUE=>x"00400000")   
 		port map(ck=>ck, rst=>rst, ce=>uins_int.wpc, D=>dtpc, Q=>pc);
 
@@ -479,15 +479,15 @@ begin
 	IR_reg:	entity work.reg32bit  
 		port map(ck=>ck, rst=>rst, ce=>uins_int.CY1, D=>instruction, Q=>IR);
 
-	IR_OUT <= IR ;    	-- IR ï¿½ o registrador de instruï¿½ï¿½es 
+	IR_OUT <= IR ;    	-- IR é o registrador de instruções 
              
-	i_address <= pc;	-- conecta a saï¿½da do PC ao barramento de endereï¿½os da memï¿½ria de
-						-- instruï¿½ï¿½es
+	i_address <= pc;	-- conecta a saída do PC ao barramento de endereços da memória de
+						-- instruções
 
     ----------------------------------------------------------------------------------------
-    -- BLOCO (2 de 4) - A Decodifiaï¿½ï¿½o de Instruï¿½ï¿½es
+    -- BLOCO (2 de 4) - A Decodifiação de Instruções
     -- Este bloco gera um sinal, i, um dos sinais da
-	-- 	funï¿½ï¿½o de saï¿½da da mï¿½quina de estados de controle do MIPS_S
+	-- 	função de saída da máquina de estados de controle do MIPS_S
     ----------------------------------------------------------------------------------------
     i <=   ADDU   when IR(31 downto 26)="000000" and IR(10 downto 0)="00000100001" else
            SUBU   when IR(31 downto 26)="000000" and IR(10 downto 0)="00000100011" else
@@ -527,31 +527,31 @@ begin
            DIVU   when IR(31 downto 26)="000000" and IR(15 downto 0)="0000000000011011" else
            MFHI   when IR(31 downto 16)=x"0000" and IR(10 downto 0)="00000010000" else
            MFLO   when IR(31 downto 16)=x"0000" and IR(10 downto 0)="00000010010" else
-           invalid_instruction ; -- IMPORTANTE: a condiï¿½ï¿½o else de tudo ï¿½ invalid instruction
+           invalid_instruction ; -- IMPORTANTE: a condição else de tudo é invalid instruction
         
     assert i /= invalid_instruction
           report "******************* INVALID INSTRUCTION *************"
           severity error;
                    
-    uins_int.i <= i;    -- isto instrui a ALU a executar a operaï¿½ï¿½o dela esperada, se houver alguma
-						-- tambï¿½m controla a operaï¿½ï¿½o de praticamente todos os multiplexadores
+    uins_int.i <= i;    -- isto instrui a ALU a executar a operação dela esperada, se houver alguma
+						-- também controla a operação de praticamente todos os multiplexadores
 						--		que definem os caminhos a usar no bloco de dados e no bloco de controle
 
     ---------------------------------------------------------------------------------------------
     -- BLOCO (3 de 4) - Dois Comandos process VHDL que respectivamente geram:
-	--					1) O Registrador de Estados da Mï¿½quina de Estados de Controle do MIPS_S
-	--					2) A Funï¿½ï¿½o de Transiï¿½ï¿½o da Mï¿½quina de Estados de Controle do MIPS_S
-	--	O Registrador de Estados ï¿½ o ï¿½nico  hardware sequencial da Mï¿½quina de Estados
-	--	A Funï¿½ï¿½o de Transiï¿½ï¿½o e uma ï¿½nica funï¿½ï¿½o Booleana combinacional que gera o prï¿½ximo estado
-	--		da Mï¿½quina de Estados
+	--					1) O Registrador de Estados da Máquina de Estados de Controle do MIPS_S
+	--					2) A Função de Transição da Máquina de Estados de Controle do MIPS_S
+	--	O Registrador de Estados é o único  hardware sequencial da Máquina de Estados
+	--	A Função de Transição e uma única função Booleana combinacional que gera o próximo estado
+	--		da Máquina de Estados
     --------------------------------------------------------------------------------------------- 
     process(rst, ck)
     begin
         if rst='1' then
-            PS <= Sfetch; -- Sfetch ï¿½ o estado em que a mï¿½quina fica enquanto o processador estï¿½ sendo ressetado
+            PS <= Sfetch; -- Sfetch é o estado em que a máquina fica enquanto o processador está sendo ressetado
         elsif ck'event and ck='1' then
-            if hold = '1' then -- Quando estiver em hold, a mï¿½quina nï¿½o anda
-                if PS /= Sfetch then -- Em hold, espera atï¿½ o prï¿½ximo Sfetch para trancar a mï¿½quina
+            if hold = '1' then -- Quando estiver em hold, a máquina não anda
+                if PS /= Sfetch then -- Em hold, espera até o próximo Sfetch para trancar a máquina
                     PS <= NS;
                 end if;
 			else
@@ -564,15 +564,15 @@ begin
     process(PS, i, end_mul, end_div)
     begin
        case PS is         
-            -- Sfetch ativa o primeiro estï¿½gio: busca-se a instruï¿½ï¿½o apontada pelo PC e incrementa-se ele
+            -- Sfetch ativa o primeiro estágio: busca-se a instrução apontada pelo PC e incrementa-se ele
             when Sfetch=>NS <= Sreg;  
 				readInst <= '1';
-            -- SReg ativa o segundo estï¿½gio: busca-se os operandos fonte da maioria das instruï¿½ï¿½es
-			--		registradores, dados imediatos e valores para computar endereï¿½os de salto
+            -- SReg ativa o segundo estágio: busca-se os operandos fonte da maioria das instruções
+			--		registradores, dados imediatos e valores para computar endereços de salto
             when Sreg=>NS <= Salu;  
 				readInst <= '0';
              
-            -- Salu ativa o terceiro estï¿½gio: operaï¿½ï¿½o na ALU, no comparador ou no multiplicador ou no divisor
+            -- Salu ativa o terceiro estágio: operação na ALU, no comparador ou no multiplicador ou no divisor
             when Salu =>if (i=LBU or i=LW) then 
 										NS <= Sld;  
 								elsif (i=SB or i=SW) then 
@@ -588,12 +588,12 @@ begin
 										NS <= Swbk; 
 								end if;
                          
-            -- Sld ativa o quarto estï¿½gio: operaï¿½ï¿½o na memï¿½ria de dados, apenas quando a instruï¿½ï¿½o sendo
-			--		requer tal tipo de aï¿½ï¿½o
+            -- Sld ativa o quarto estágio: operação na memória de dados, apenas quando a instrução sendo
+			--		requer tal tipo de ação
             when Sld=>  NS <= Swbk; 
             
-            -- Sst/Ssalta/ Swbk ativam o quarto ou quinto estï¿½gio: 
-			--		ï¿½ltimo estï¿½gio para a maioria das instruï¿½ï¿½es
+            -- Sst/Ssalta/ Swbk ativam o quarto ou quinto estágio: 
+			--		último estágio para a maioria das instruções
             when Sst | Ssalta | Swbk=> 
 								NS <= Sfetch;
   
@@ -602,12 +602,12 @@ begin
     end process;
 	
 	----------------------------------------------------------------------------------------
-    -- BLOCO (4 de 4) - Funï¿½ï¿½o de Saï¿½da da Mï¿½quina de Estados de Controle do MIPS_S
-	--	Gera 11 sinais  de controle - a maioria destes sï¿½o sinais de habilitaï¿½ï¿½o 
+    -- BLOCO (4 de 4) - Função de Saída da Máquina de Estados de Controle do MIPS_S
+	--	Gera 11 sinais  de controle - a maioria destes são sinais de habilitação 
 	--	de escrita em registradores dos blocos de dados e de controle
-    -- 	Tambï¿½m gera os sinais de controle de acesso a memï¿½ria de dados e o sinal de
-	--	inicializaï¿½ï¿½o dos blocos de multiplicaï¿½ï¿½o e divisï¿½o
-	--		Ao todo, sï¿½o 11 funï¿½ï¿½es Booleanas, uma para cada sinal de controle
+    -- 	Também gera os sinais de controle de acesso a memória de dados e o sinal de
+	--	inicialização dos blocos de multiplicação e divisão
+	--		Ao todo, são 11 funções Booleanas, uma para cada sinal de controle
     ----------------------------------------------------------------------------------------
     uins_int.CY1   <= '1' when PS=Sfetch         else '0';
             
