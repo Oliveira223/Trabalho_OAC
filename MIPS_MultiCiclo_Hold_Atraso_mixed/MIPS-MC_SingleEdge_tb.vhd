@@ -128,18 +128,11 @@ end aux_functions;
 -- (`RAM_mem.sv`) can provide the memory model in mixed-language Questa
 -- simulations. The entity declaration remains and is provided below.
 --------------------------------------------------------------------------
-
-library IEEE;
-use ieee.std_logic_1164.all;
-use work.aux_functions.all;
-
-entity RAM_mem is
-      generic(  START_ADDRESS: wires32 := (others=>'0')  );
-      port( ce_n, we_n, oe_n, bw: in std_logic;    address: in wires32;   data: inout wires32);
-end RAM_mem;
+-- RAM_mem entity now provided by SystemVerilog module RAM_mem.sv
+--------------------------------------------------------------------------
 
 --------------------------------------------------------------------------
--- Testebench para simular a CPU do processador (unchanged except RAM body removal)
+-- Testebench para simular a CPU do processador
 --------------------------------------------------------------------------
 library ieee;
 use IEEE.std_logic_1164.all;
@@ -152,6 +145,53 @@ end CPU_tb;
 
 architecture cpu_tb of cpu_tb is
     
+    -- Component declaration for SystemVerilog RAM_mem module
+    component RAM_mem
+        generic(START_ADDRESS: std_logic_vector(31 downto 0) := (others=>'0'));
+        port(
+            ce_n, we_n, oe_n, bw: in std_logic;
+            address: in wires32;
+            data: inout wires32
+        );
+    end component;
+    
+    -- Component declaration for L1 cache
+    component l1_cache
+        port(
+            clk: in std_logic;
+            reset_n: in std_logic;
+            cpu_addr: in wires32;
+            cpu_data: inout wires32;
+            cpu_ce: in std_logic;
+            cpu_rw: in std_logic;
+            cpu_bw: in std_logic;
+            cpu_ack: out std_logic;
+            cpu_hit: out std_logic;
+            mem_addr: out wires32;
+            mem_data: inout wires32;
+            mem_ce: out std_logic;
+            mem_rw: out std_logic;
+            mem_ack: in std_logic
+        );
+    end component;
+    
+    -- Component declaration for mp_delay with ack
+    component mp_delay_with_ack
+        generic(
+            LATENCY: integer := 16;
+            MEMORY_SIZE: integer := 2048;
+            START_ADDRESS: std_logic_vector(31 downto 0) := (others=>'0')
+        );
+        port(
+            clk: in std_logic;
+            reset_n: in std_logic;
+            ce_n, we_n, oe_n, bw: in std_logic;
+            address: in wires32;
+            data: inout wires32;
+            ack: out std_logic
+        );
+    end component;
+    
     signal Dadress, Ddata, Iadress, Idata,
            i_cpu_address, d_cpu_address, data_cpu, tb_add, tb_data : wires32 := (others => '0' );
     
@@ -160,26 +200,123 @@ architecture cpu_tb of cpu_tb is
 	   
     signal readInst: std_logic;
     
+    -- Sinais para cache L1 (memória de dados)
+    signal cache_reset_n: std_logic;
+    signal cache_cpu_addr: wires32;
+    signal cache_cpu_data: wires32;
+    signal cache_cpu_ce: std_logic;
+    signal cache_cpu_rw: std_logic;
+    signal cache_cpu_ack: std_logic;
+    signal cache_cpu_hit: std_logic;
+    signal cache_mem_addr: wires32;
+    signal cache_mem_data: wires32;
+    signal cache_mem_ce: std_logic;
+    signal cache_mem_rw: std_logic;
+    signal cache_mem_ack: std_logic;
+    
+    -- Sinais para mp_delay
+    signal mp_ce_n: std_logic;
+    signal mp_we_n: std_logic;
+    signal mp_oe_n: std_logic;
+    
+    -- Contador de tempo de execução
+    signal cycle_count: integer := 0;
+    signal exec_time_ns: real := 0.0;
+    signal execution_active: std_logic := '0';  -- indica se a execução está ativa
+    signal first_invalid: std_logic := '0';     -- marca primeira instrução inválida
+    
+    -- Estatísticas da cache
+    signal cache_hits: integer := 0;
+    signal cache_misses: integer := 0;
+    signal cache_accesses: integer := 0;
+    signal cache_cpu_ack_prev: std_logic := '0';  -- Para detectar rising edge
+    
     file ARQ : TEXT open READ_MODE is "Test_Program_Allinst_MIPS_MCS.txt";
  
 begin
-           
-    Data_mem:  entity work.RAM_mem 
-               generic map( START_ADDRESS => x"10010000" )
-               port map (ce_n=>Dce_n, we_n=>Dwe_n, oe_n=>Doe_n, bw=>bw, address=>Dadress, data=>Ddata);
+    
+    ----------------------------------------------------------------------------
+    -- HIERARQUIA DE MEMÓRIA DE DADOS: CPU → Cache L1 → mp_delay
+    ----------------------------------------------------------------------------
+    
+    -- Cache L1 (conectada à CPU)
+    Data_cache: l1_cache
+        port map (
+            clk => ck,
+            reset_n => cache_reset_n,
+            cpu_addr => cache_cpu_addr,
+            cpu_data => cache_cpu_data,
+            cpu_ce => cache_cpu_ce,
+            cpu_rw => cache_cpu_rw,
+            cpu_bw => bw,
+            cpu_ack => cache_cpu_ack,
+            cpu_hit => cache_cpu_hit,
+            mem_addr => cache_mem_addr,
+            mem_data => cache_mem_data,
+            mem_ce => cache_mem_ce,
+            mem_rw => cache_mem_rw,
+            mem_ack => cache_mem_ack
+        );
+    
+    -- mp_delay_with_ack (memória lenta conectada à cache)
+    Data_mp: mp_delay_with_ack
+        generic map(
+            LATENCY => 16,
+            MEMORY_SIZE => 2048,
+            START_ADDRESS => x"10010000"
+        )
+        port map (
+            clk => ck,
+            reset_n => cache_reset_n,
+            ce_n => mp_ce_n,
+            we_n => mp_we_n,
+            oe_n => mp_oe_n,
+            bw => bw,
+            address => cache_mem_addr,
+            data => cache_mem_data,
+            ack => cache_mem_ack
+        );
+    
+    -- Adaptação dos sinais cache ↔ mp_delay
+    mp_ce_n <= not cache_mem_ce;
+    mp_we_n <= cache_mem_rw;  -- rw=1 (read) → we_n=1, rw=0 (write) → we_n=0
+    mp_oe_n <= not cache_mem_rw;  -- rw=1 (read) → oe_n=0, rw=0 (write) → oe_n=1
+    
+    ----------------------------------------------------------------------------
+    -- MEMÓRIA DE INSTRUÇÕES (sem cache, acesso direto)
+    ----------------------------------------------------------------------------
                                              
-    Instr_mem: entity work.RAM_mem 
+    Instr_mem: RAM_mem
                generic map( START_ADDRESS => x"00400000" )
                port map (ce_n=>Ice_n, we_n=>Iwe_n, oe_n=>Ioe_n, bw=>'1', address=>Iadress, data=>Idata);
-        
+    
+    ----------------------------------------------------------------------------
+    -- Adaptação de sinais da CPU para a Cache L1 (memória de dados)
+    ----------------------------------------------------------------------------
+    cache_reset_n <= not rstCPU;
+    cache_cpu_addr <= d_cpu_address;
+    cache_cpu_ce <= ce when rstCPU='0' else '0';
+    cache_cpu_rw <= rw;
+    
+    -- Dados bidirecionais: CPU ↔ Cache
+    -- Escrita: CPU → Cache
+    cache_cpu_data <= data_cpu when (ce='1' and rw='0' and rstCPU='0') else (others=>'Z');
+    -- Leitura: Cache → CPU
+    data_cpu <= cache_cpu_data when (ce='1' and rw='1' and rstCPU='0') else (others=>'Z');
+    
+    -- HOLD: pausa CPU quando cache não está pronta (aguardando miss)
+    -- Mantém hold da leitura de instruções + hold do acesso à cache
     process(rst, ck)
-		variable em_count: std_logic;
-		variable count: integer;
+        variable em_count: std_logic;
+        variable count: integer;
+        variable cache_wait: std_logic;
     begin
-		if rst = '1' then
-			hold <= '0';
-			em_count := '0';
+        if rst = '1' then
+            hold <= '0';
+            em_count := '0';
+            cache_wait := '0';
         elsif ck'event and ck = '0' then
+            -- Hold para leitura de instruções (readInst)
             if readInst = '1' then
                 if em_count = '0' then
                     count := 0;
@@ -193,24 +330,25 @@ begin
                        count := count + 1;
                     end if;
                 end if;
-             end if;
+            -- Hold para esperar ack da cache (quando CPU acessa memória)
+            elsif ce = '1' and rstCPU = '0' then
+                if cache_cpu_ack = '0' then
+                    hold <= '1';  -- CPU espera cache
+                else
+                    hold <= '0';  -- Cache respondeu
+                end if;
+            else
+                hold <= '0';
+            end if;
         end if; 
     end process;
                                    
-    -- sinais para adaptar a mem�ria de dados ao processador ---------------------------------------------
-    Dce_n <= '0' when (ce='1' and rstCPU/='1') or go_d='1' else '1'; -- Bug corrected here in 16/05/2012
-    Doe_n <= '0' when (ce='1' and rw='1')             else '1';       
-    Dwe_n <= '0' when (ce='1' and rw='0') or go_d='1' else '1';    
-
-    Dadress <= tb_add  when rstCPU='1' else d_cpu_address;
-    Ddata   <= tb_data when rstCPU='1' else data_cpu when (ce='1' and rw='0') else (others=>'Z'); 
-    
-    data_cpu <= Ddata when (ce='1' and rw='1') else (others=>'Z');
-    
-    -- sinais para adaptar a mem�ria de instru��es ao processador ---------------------------------------------
+    ----------------------------------------------------------------------------
+    -- sinais para adaptar a memória de instruções ao processador
+    ----------------------------------------------------------------------------
     
 	Ice_n <= '0';                        
-    Ioe_n <= '1' when rstCPU='1' else '0';           -- impede leitura enquanto est� escrevendo
+    Ioe_n <= '1' when rstCPU='1' else '0';           -- impede leitura enquanto está escrevendo
     Iwe_n <= '0' when go_i='1'   else '1';           -- escrita durante a leitura do arquivo
     
     Iadress <= tb_add  when rstCPU='1' else i_cpu_address;
@@ -234,6 +372,123 @@ begin
         begin
         ck <= '1', '0' after 10 ns;
         wait for 20 ns;
+    end process;
+
+    ----------------------------------------------------------------------------
+    -- Contador de ciclos de clock e tempo de execução
+    ----------------------------------------------------------------------------
+    process(ck, rstCPU)
+    begin
+        if rstCPU = '1' then
+            cycle_count <= 0;
+            exec_time_ns <= 0.0;
+            execution_active <= '0';
+            first_invalid <= '0';
+            cache_hits <= 0;
+            cache_misses <= 0;
+            cache_accesses <= 0;
+            cache_cpu_ack_prev <= '0';
+        elsif rising_edge(ck) then
+            -- Inicia contagem após o reset
+            if execution_active = '0' then
+                execution_active <= '1';
+                report "========================================";
+                report "INICIANDO CONTAGEM DE TEMPO DE EXECUCAO";
+                report "COM CACHE L1 + MP_DELAY (LATENCY=16)";
+                report "========================================";
+            end if;
+            
+            cycle_count <= cycle_count + 1;
+            exec_time_ns <= real(cycle_count + 1) * 20.0; -- período de clock = 20 ns
+            
+            -- Detecta rising edge de cache_cpu_ack para contar acessos
+            cache_cpu_ack_prev <= cache_cpu_ack;
+            if cache_cpu_ack = '1' and cache_cpu_ack_prev = '0' then
+                cache_accesses <= cache_accesses + 1;
+                if cache_cpu_hit = '1' then
+                    cache_hits <= cache_hits + 1;
+                else
+                    cache_misses <= cache_misses + 1;
+                end if;
+            end if;
+            
+            -- Exibe o tempo a cada 1000 ciclos
+            if (cycle_count + 1) mod 1000 = 0 then
+                report "Ciclos: " & integer'image(cycle_count + 1) & 
+                       " | Tempo: " & real'image(exec_time_ns) & " ns" &
+                       " | Cache: " & integer'image(cache_hits) & " hits, " &
+                       integer'image(cache_misses) & " misses";
+            end if;
+        end if;
+    end process;
+    
+    -- Processo para detectar fim da execução (quando cache para de ser acessada)
+    process
+        variable last_valid_cycle: integer := 0;
+        variable last_valid_time: real := 0.0;
+        variable last_cache_accesses: integer := 0;
+        variable exec_time_us: real := 0.0;
+        variable exec_time_ms: real := 0.0;
+        variable exec_time_s: real := 0.0;
+        variable hit_rate: real := 0.0;
+        variable miss_rate: real := 0.0;
+        variable stall_count: integer := 0;
+    begin
+        wait until rstCPU = '0';  -- espera o processador iniciar
+        wait for 200 ns;           -- aguarda estabilização
+        
+        -- Loop principal de monitoramento
+        loop
+            wait until rising_edge(ck);
+            
+            -- Verifica se houve novos acessos à cache
+            if cache_accesses /= last_cache_accesses then
+                -- Houve acesso, atualiza referências
+                last_cache_accesses := cache_accesses;
+                last_valid_cycle := cycle_count;
+                last_valid_time := exec_time_ns;
+                stall_count := 0;
+            else
+                -- Sem novos acessos, incrementa contador
+                stall_count := stall_count + 1;
+            end if;
+            
+            -- Se ficou 50000 ciclos sem acessar cache, considera que terminou
+            if stall_count >= 50000 then
+                -- Nenhum ciclo novo, pode ter terminado
+                -- Calcula tempo em diferentes unidades
+                exec_time_us := last_valid_time / 1000.0;
+                exec_time_ms := exec_time_us / 1000.0;
+                exec_time_s := exec_time_ms / 1000.0;
+                
+                -- Calcula taxas de hit/miss
+                if cache_accesses > 0 then
+                    hit_rate := (real(cache_hits) / real(cache_accesses)) * 100.0;
+                    miss_rate := (real(cache_misses) / real(cache_accesses)) * 100.0;
+                else
+                    hit_rate := 0.0;
+                    miss_rate := 0.0;
+                end if;
+                
+                report "========================================";
+                report "     RESUMO DA EXECUCAO COM CACHE L1";
+                report "========================================";
+                report "Total de ciclos: " & integer'image(last_valid_cycle);
+                report "Tempo total (ns): " & real'image(last_valid_time) & " ns";
+                report "Tempo total (us): " & real'image(exec_time_us) & " us";
+                report "Tempo total (ms): " & real'image(exec_time_ms) & " ms";
+                report "Tempo total (s):  " & real'image(exec_time_s) & " s";
+                report "----------------------------------------";
+                report "ESTATISTICAS DA CACHE L1:";
+                report "Total de acessos: " & integer'image(cache_accesses);
+                report "Cache hits:       " & integer'image(cache_hits) & 
+                       " (" & real'image(hit_rate) & " %)";
+                report "Cache misses:     " & integer'image(cache_misses) &
+                       " (" & real'image(miss_rate) & " %)";
+                report "========================================";
+                exit;
+            end if;
+        end loop;
     end process;
 
     

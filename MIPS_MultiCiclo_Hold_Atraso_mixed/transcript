@@ -1,0 +1,700 @@
+# do sim.do
+# ** Warning: (vdel-134) Unable to remove locked optimized design "_opt".  Locker is be@BeComputer.
+# ** Warning: (vlib-34) Library already exists at "work".
+# Errors: 0, Warnings: 1
+# Questa Altera Starter FPGA Edition-64 vmap 2025.2 Lib Mapping Utility 2025.05 May 31 2025
+# vmap work work 
+# ** Note: (vmap-220) 'modelsim.ini' is used as the ini file.
+# ** Note: (vmap-223) The environment variable MGC_HOME will be deprecated in future releases. Please use QSIM_HOME instead.
+# Modifying modelsim.ini
+# Questa Altera Starter FPGA Edition-64 vlog 2025.2 Compiler 2025.05 May 31 2025
+# Start time: 19:44:00 on Nov 12,2025
+# vlog RAM_mem.sv l1_cache.sv mp_delay.sv mp_delay_with_ack.sv 
+# ** Note: (vlog-220) 'modelsim.ini' is used as the ini file.
+# ** Note: (vlog-223) The environment variable MGC_HOME will be deprecated in future releases. Please use QSIM_HOME instead.
+# -- Compiling module RAM_mem
+# -- Compiling module l1_cache
+# -- Compiling module mp_delay
+# -- Compiling module mp_delay_with_ack
+# 
+# Top level modules:
+# 	RAM_mem
+# 	l1_cache
+# 	mp_delay
+# 	mp_delay_with_ack
+# End time: 19:44:00 on Nov 12,2025, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Questa Altera Starter FPGA Edition-64 vcom 2025.2 Compiler 2025.05 May 31 2025
+# Start time: 19:44:00 on Nov 12,2025
+# vcom mult_div.vhd 
+# ** Note: (vcom-220) 'modelsim.ini' is used as the ini file.
+# ** Note: (vcom-223) The environment variable MGC_HOME will be deprecated in future releases. Please use QSIM_HOME instead.
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Loading package STD_LOGIC_UNSIGNED
+# -- Compiling entity multiplica
+# -- Compiling architecture multiplica of multiplica
+# -- Compiling entity divide
+# -- Compiling architecture divide of divide
+# End time: 19:44:00 on Nov 12,2025, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Questa Altera Starter FPGA Edition-64 vcom 2025.2 Compiler 2025.05 May 31 2025
+# Start time: 19:44:00 on Nov 12,2025
+# vcom MIPS-MC_SingleEdge.vhd 
+# ** Note: (vcom-220) 'modelsim.ini' is used as the ini file.
+# ** Note: (vcom-223) The environment variable MGC_HOME will be deprecated in future releases. Please use QSIM_HOME instead.
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling package p_MIPS_S
+# -- Compiling entity reg32bit
+# -- Compiling architecture reg32bit of reg32bit
+# -- Loading package std_logic_arith
+# -- Loading package STD_LOGIC_UNSIGNED
+# -- Loading package p_MIPS_S
+# -- Compiling entity reg_bank
+# -- Compiling architecture reg_bank of reg_bank
+# -- Loading entity reg32bit
+# -- Compiling entity alu
+# -- Compiling architecture alu of alu
+# -- Loading package STD_LOGIC_SIGNED
+# -- Compiling entity datapath
+# -- Compiling architecture datapath of datapath
+# -- Loading entity reg_bank
+# -- Loading entity alu
+# -- Loading entity multiplica
+# -- Loading entity divide
+# -- Compiling entity control_unit
+# -- Compiling architecture control_unit of control_unit
+# -- Compiling entity MIPS_S
+# -- Compiling architecture MIPS_S of MIPS_S
+# -- Loading entity datapath
+# -- Loading entity control_unit
+# End time: 19:44:00 on Nov 12,2025, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Questa Altera Starter FPGA Edition-64 vcom 2025.2 Compiler 2025.05 May 31 2025
+# Start time: 19:44:00 on Nov 12,2025
+# vcom MIPS-MC_SingleEdge_tb.vhd 
+# ** Note: (vcom-220) 'modelsim.ini' is used as the ini file.
+# ** Note: (vcom-223) The environment variable MGC_HOME will be deprecated in future releases. Please use QSIM_HOME instead.
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling package aux_functions
+# -- Compiling package body aux_functions
+# -- Loading package aux_functions
+# -- Loading package std_logic_arith
+# -- Loading package STD_LOGIC_UNSIGNED
+# -- Loading package aux_functions
+# -- Compiling entity CPU_tb
+# -- Compiling architecture cpu_tb of cpu_tb
+# -- Loading package p_MIPS_S
+# -- Loading entity MIPS_S
+# End time: 19:44:00 on Nov 12,2025, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# ** Note: (vsim-220) 'modelsim.ini' is used as the ini file.
+# ** Note: (vsim-223) The environment variable MGC_HOME will be deprecated in future releases. Please use QSIM_HOME instead.
+# vsim -voptargs="+acc=lprn" -t ps work.CPU_tb 
+# Start time: 19:44:00 on Nov 12,2025
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Warning: (vopt-10908) Some optimizations are turned off because the +acc switch is in effect.
+# ** Note: (vopt-220) 'modelsim.ini' is used as the ini file.
+# ** Note: (vopt-223) The environment variable MGC_HOME will be deprecated in future releases. Please use QSIM_HOME instead.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# //  Questa Altera Starter FPGA Edition-64
+# //  Version 2025.2 linux_x86_64 May 31 2025
+# //
+# // Unpublished work. Copyright 2025 Siemens
+# //
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
+# //
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading work.aux_functions(body)
+# Loading work.p_mips_s
+# Loading work.cpu_tb(cpu_tb)#1
+# Loading sv_std.std
+# Loading work.l1_cache(fast)
+# Loading work.mp_delay_with_ack(fast)
+# Loading work.RAM_mem(fast)
+# Loading ieee.std_logic_signed(body)
+# Loading work.mips_s(mips_s)#1
+# Loading work.datapath(datapath)#1
+# Loading work.reg_bank(reg_bank)#1
+# Loading work.reg32bit(reg32bit)#5
+# Loading work.reg32bit(reg32bit)#3
+# Loading work.alu(alu)#1
+# Loading work.multiplica(multiplica)#1
+# Loading work.divide(divide)#1
+# Loading work.control_unit(control_unit)#1
+# Loading work.reg32bit(reg32bit)#2
+# Unable to lock WLF file "vsim.wlf". Retrying 1 times, errno 11
+# Unable to lock WLF file "vsim.wlf". Retrying 2 times, errno 11
+# Unable to lock WLF file "vsim.wlf". Retrying 3 times, errno 11
+# Cannot lock WLF file: "vsim.wlf"
+#           errno 11: Resource temporarily unavailable.
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by: be  Hostname: BeComputer  ProcessID: 15020
+#           Attempting to use alternate WLF file "./wlftVznROj".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlftVznROj
+# 1
+# 1
+# ** Error: ******************* INVALID INSTRUCTION *************
+#    Time: 0 ps  Iteration: 1  Instance: /cpu_tb/cpu/ct
+# ** Note: ========================================
+#    Time: 20 ns  Iteration: 1  Instance: /cpu_tb
+# ** Note: INICIANDO CONTAGEM DE TEMPO DE EXECUCAO
+#    Time: 20 ns  Iteration: 1  Instance: /cpu_tb
+# ** Note: COM CACHE L1 + MP_DELAY (LATENCY=16)
+#    Time: 20 ns  Iteration: 1  Instance: /cpu_tb
+# ** Note: ========================================
+#    Time: 20 ns  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 1000 | Tempo: 1.998000e+04 ns | Cache: 0 hits, 1 misses
+#    Time: 20 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 2000 | Tempo: 3.998000e+04 ns | Cache: 14 hits, 2 misses
+#    Time: 40 us  Iteration: 1  Instance: /cpu_tb
+#  run 5ms
+# ** Note: Ciclos: 3000 | Tempo: 5.998000e+04 ns | Cache: 35 hits, 2 misses
+#    Time: 60 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 4000 | Tempo: 7.998000e+04 ns | Cache: 51 hits, 3 misses
+#    Time: 80 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 5000 | Tempo: 9.998000e+04 ns | Cache: 66 hits, 4 misses
+#    Time: 100 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 6000 | Tempo: 1.199800e+05 ns | Cache: 81 hits, 5 misses
+#    Time: 120 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 7000 | Tempo: 1.399800e+05 ns | Cache: 98 hits, 6 misses
+#    Time: 140 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 8000 | Tempo: 1.599800e+05 ns | Cache: 116 hits, 7 misses
+#    Time: 160 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 9000 | Tempo: 1.799800e+05 ns | Cache: 134 hits, 7 misses
+#    Time: 180 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 10000 | Tempo: 1.999800e+05 ns | Cache: 149 hits, 8 misses
+#    Time: 200 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 11000 | Tempo: 2.199800e+05 ns | Cache: 164 hits, 9 misses
+#    Time: 220 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 12000 | Tempo: 2.399800e+05 ns | Cache: 179 hits, 10 misses
+#    Time: 240 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 13000 | Tempo: 2.599800e+05 ns | Cache: 194 hits, 11 misses
+#    Time: 260 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 14000 | Tempo: 2.799800e+05 ns | Cache: 209 hits, 12 misses
+#    Time: 280 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 15000 | Tempo: 2.999800e+05 ns | Cache: 225 hits, 13 misses
+#    Time: 300 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 16000 | Tempo: 3.199800e+05 ns | Cache: 242 hits, 14 misses
+#    Time: 320 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 17000 | Tempo: 3.399800e+05 ns | Cache: 260 hits, 15 misses
+#    Time: 340 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 18000 | Tempo: 3.599800e+05 ns | Cache: 277 hits, 15 misses
+#    Time: 360 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 19000 | Tempo: 3.799800e+05 ns | Cache: 292 hits, 16 misses
+#    Time: 380 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 20000 | Tempo: 3.999800e+05 ns | Cache: 308 hits, 17 misses
+#    Time: 400 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 21000 | Tempo: 4.199800e+05 ns | Cache: 323 hits, 18 misses
+#    Time: 420 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 22000 | Tempo: 4.399800e+05 ns | Cache: 338 hits, 19 misses
+#    Time: 440 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 23000 | Tempo: 4.599800e+05 ns | Cache: 353 hits, 20 misses
+#    Time: 460 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 24000 | Tempo: 4.799800e+05 ns | Cache: 368 hits, 21 misses
+#    Time: 480 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 25000 | Tempo: 4.999800e+05 ns | Cache: 386 hits, 22 misses
+#    Time: 500 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 26000 | Tempo: 5.199800e+05 ns | Cache: 404 hits, 22 misses
+#    Time: 520 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 27000 | Tempo: 5.399800e+05 ns | Cache: 420 hits, 23 misses
+#    Time: 540 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 28000 | Tempo: 5.599800e+05 ns | Cache: 435 hits, 24 misses
+#    Time: 560 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 29000 | Tempo: 5.799800e+05 ns | Cache: 451 hits, 25 misses
+#    Time: 580 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 30000 | Tempo: 5.999800e+05 ns | Cache: 466 hits, 26 misses
+#    Time: 600 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 31000 | Tempo: 6.199800e+05 ns | Cache: 482 hits, 27 misses
+#    Time: 620 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 32000 | Tempo: 6.399800e+05 ns | Cache: 497 hits, 28 misses
+#    Time: 640 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 33000 | Tempo: 6.599800e+05 ns | Cache: 512 hits, 29 misses
+#    Time: 660 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 34000 | Tempo: 6.799800e+05 ns | Cache: 530 hits, 30 misses
+#    Time: 680 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 35000 | Tempo: 6.999800e+05 ns | Cache: 548 hits, 30 misses
+#    Time: 700 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 36000 | Tempo: 7.199800e+05 ns | Cache: 563 hits, 31 misses
+#    Time: 720 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 37000 | Tempo: 7.399800e+05 ns | Cache: 579 hits, 32 misses
+#    Time: 740 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 38000 | Tempo: 7.599800e+05 ns | Cache: 594 hits, 33 misses
+#    Time: 760 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 39000 | Tempo: 7.799800e+05 ns | Cache: 609 hits, 34 misses
+#    Time: 780 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 40000 | Tempo: 7.999800e+05 ns | Cache: 625 hits, 35 misses
+#    Time: 800 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 41000 | Tempo: 8.199800e+05 ns | Cache: 641 hits, 36 misses
+#    Time: 820 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 42000 | Tempo: 8.399800e+05 ns | Cache: 656 hits, 37 misses
+#    Time: 840 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 43000 | Tempo: 8.599800e+05 ns | Cache: 674 hits, 38 misses
+#    Time: 860 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 44000 | Tempo: 8.799800e+05 ns | Cache: 692 hits, 38 misses
+#    Time: 880 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 45000 | Tempo: 8.999800e+05 ns | Cache: 707 hits, 39 misses
+#    Time: 900 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 46000 | Tempo: 9.199800e+05 ns | Cache: 722 hits, 40 misses
+#    Time: 920 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 47000 | Tempo: 9.399800e+05 ns | Cache: 737 hits, 41 misses
+#    Time: 940 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 48000 | Tempo: 9.599800e+05 ns | Cache: 753 hits, 42 misses
+#    Time: 960 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 49000 | Tempo: 9.799800e+05 ns | Cache: 768 hits, 43 misses
+#    Time: 980 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 50000 | Tempo: 9.999800e+05 ns | Cache: 783 hits, 44 misses
+#    Time: 1 ms  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 51000 | Tempo: 1.019980e+06 ns | Cache: 800 hits, 45 misses
+#    Time: 1020 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 52000 | Tempo: 1.039980e+06 ns | Cache: 818 hits, 46 misses
+#    Time: 1040 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 53000 | Tempo: 1.059980e+06 ns | Cache: 836 hits, 46 misses
+#    Time: 1060 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 54000 | Tempo: 1.079980e+06 ns | Cache: 851 hits, 47 misses
+#    Time: 1080 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 55000 | Tempo: 1.099980e+06 ns | Cache: 866 hits, 48 misses
+#    Time: 1100 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 56000 | Tempo: 1.119980e+06 ns | Cache: 881 hits, 49 misses
+#    Time: 1120 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 57000 | Tempo: 1.139980e+06 ns | Cache: 896 hits, 50 misses
+#    Time: 1140 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 58000 | Tempo: 1.159980e+06 ns | Cache: 911 hits, 51 misses
+#    Time: 1160 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 59000 | Tempo: 1.179980e+06 ns | Cache: 927 hits, 52 misses
+#    Time: 1180 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 60000 | Tempo: 1.199980e+06 ns | Cache: 944 hits, 53 misses
+#    Time: 1200 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 61000 | Tempo: 1.219980e+06 ns | Cache: 962 hits, 54 misses
+#    Time: 1220 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 62000 | Tempo: 1.239980e+06 ns | Cache: 979 hits, 54 misses
+#    Time: 1240 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 63000 | Tempo: 1.259980e+06 ns | Cache: 995 hits, 55 misses
+#    Time: 1260 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 64000 | Tempo: 1.279980e+06 ns | Cache: 1010 hits, 56 misses
+#    Time: 1280 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 65000 | Tempo: 1.299980e+06 ns | Cache: 1025 hits, 57 misses
+#    Time: 1300 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 66000 | Tempo: 1.319980e+06 ns | Cache: 1040 hits, 58 misses
+#    Time: 1320 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 67000 | Tempo: 1.339980e+06 ns | Cache: 1055 hits, 59 misses
+#    Time: 1340 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 68000 | Tempo: 1.359980e+06 ns | Cache: 1070 hits, 60 misses
+#    Time: 1360 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 69000 | Tempo: 1.379980e+06 ns | Cache: 1088 hits, 61 misses
+#    Time: 1380 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 70000 | Tempo: 1.399980e+06 ns | Cache: 1106 hits, 61 misses
+#    Time: 1400 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 71000 | Tempo: 1.419980e+06 ns | Cache: 1122 hits, 62 misses
+#    Time: 1420 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 72000 | Tempo: 1.439980e+06 ns | Cache: 1137 hits, 63 misses
+#    Time: 1440 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 73000 | Tempo: 1.459980e+06 ns | Cache: 1153 hits, 64 misses
+#    Time: 1460 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 74000 | Tempo: 1.479980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 1480 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 75000 | Tempo: 1.499980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 1500 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 76000 | Tempo: 1.519980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 1520 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 77000 | Tempo: 1.539980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 1540 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 78000 | Tempo: 1.559980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 1560 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 79000 | Tempo: 1.579980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 1580 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 80000 | Tempo: 1.599980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 1600 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 81000 | Tempo: 1.619980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 1620 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 82000 | Tempo: 1.639980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 1640 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 83000 | Tempo: 1.659980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 1660 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 84000 | Tempo: 1.679980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 1680 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 85000 | Tempo: 1.699980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 1700 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 86000 | Tempo: 1.719980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 1720 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 87000 | Tempo: 1.739980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 1740 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 88000 | Tempo: 1.759980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 1760 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 89000 | Tempo: 1.779980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 1780 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 90000 | Tempo: 1.799980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 1800 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 91000 | Tempo: 1.819980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 1820 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 92000 | Tempo: 1.839980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 1840 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 93000 | Tempo: 1.859980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 1860 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 94000 | Tempo: 1.879980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 1880 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 95000 | Tempo: 1.899980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 1900 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 96000 | Tempo: 1.919980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 1920 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 97000 | Tempo: 1.939980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 1940 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 98000 | Tempo: 1.959980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 1960 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 99000 | Tempo: 1.979980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 1980 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 100000 | Tempo: 1.999980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 2 ms  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 101000 | Tempo: 2.019980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 2020 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 102000 | Tempo: 2.039980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 2040 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 103000 | Tempo: 2.059980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 2060 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 104000 | Tempo: 2.079980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 2080 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 105000 | Tempo: 2.099980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 2100 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 106000 | Tempo: 2.119980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 2120 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 107000 | Tempo: 2.139980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 2140 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 108000 | Tempo: 2.159980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 2160 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 109000 | Tempo: 2.179980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 2180 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 110000 | Tempo: 2.199980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 2200 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 111000 | Tempo: 2.219980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 2220 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 112000 | Tempo: 2.239980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 2240 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 113000 | Tempo: 2.259980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 2260 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 114000 | Tempo: 2.279980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 2280 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 115000 | Tempo: 2.299980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 2300 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 116000 | Tempo: 2.319980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 2320 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 117000 | Tempo: 2.339980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 2340 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 118000 | Tempo: 2.359980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 2360 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 119000 | Tempo: 2.379980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 2380 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 120000 | Tempo: 2.399980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 2400 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 121000 | Tempo: 2.419980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 2420 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 122000 | Tempo: 2.439980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 2440 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 123000 | Tempo: 2.459980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 2460 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: ========================================
+#    Time: 2465780 ns  Iteration: 1  Instance: /cpu_tb
+# ** Note:      RESUMO DA EXECUCAO COM CACHE L1
+#    Time: 2465780 ns  Iteration: 1  Instance: /cpu_tb
+# ** Note: ========================================
+#    Time: 2465780 ns  Iteration: 1  Instance: /cpu_tb
+# ** Note: Total de ciclos: 73288
+#    Time: 2465780 ns  Iteration: 1  Instance: /cpu_tb
+# ** Note: Tempo total (ns): 1.465760e+06 ns
+#    Time: 2465780 ns  Iteration: 1  Instance: /cpu_tb
+# ** Note: Tempo total (us): 1.465760e+03 us
+#    Time: 2465780 ns  Iteration: 1  Instance: /cpu_tb
+# ** Note: Tempo total (ms): 1.465760e+00 ms
+#    Time: 2465780 ns  Iteration: 1  Instance: /cpu_tb
+# ** Note: Tempo total (s):  1.465760e-03 s
+#    Time: 2465780 ns  Iteration: 1  Instance: /cpu_tb
+# ** Note: ----------------------------------------
+#    Time: 2465780 ns  Iteration: 1  Instance: /cpu_tb
+# ** Note: ESTATISTICAS DA CACHE L1:
+#    Time: 2465780 ns  Iteration: 1  Instance: /cpu_tb
+# ** Note: Total de acessos: 1224
+#    Time: 2465780 ns  Iteration: 1  Instance: /cpu_tb
+# ** Note: Cache hits:       1160 (9.477124e+01 %)
+#    Time: 2465780 ns  Iteration: 1  Instance: /cpu_tb
+# ** Note: Cache misses:     64 (5.228758e+00 %)
+#    Time: 2465780 ns  Iteration: 1  Instance: /cpu_tb
+# ** Note: ========================================
+#    Time: 2465780 ns  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 124000 | Tempo: 2.479980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 2480 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 125000 | Tempo: 2.499980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 2500 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 126000 | Tempo: 2.519980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 2520 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 127000 | Tempo: 2.539980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 2540 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 128000 | Tempo: 2.559980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 2560 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 129000 | Tempo: 2.579980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 2580 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 130000 | Tempo: 2.599980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 2600 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 131000 | Tempo: 2.619980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 2620 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 132000 | Tempo: 2.639980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 2640 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 133000 | Tempo: 2.659980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 2660 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 134000 | Tempo: 2.679980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 2680 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 135000 | Tempo: 2.699980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 2700 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 136000 | Tempo: 2.719980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 2720 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 137000 | Tempo: 2.739980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 2740 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 138000 | Tempo: 2.759980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 2760 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 139000 | Tempo: 2.779980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 2780 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 140000 | Tempo: 2.799980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 2800 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 141000 | Tempo: 2.819980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 2820 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 142000 | Tempo: 2.839980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 2840 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 143000 | Tempo: 2.859980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 2860 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 144000 | Tempo: 2.879980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 2880 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 145000 | Tempo: 2.899980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 2900 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 146000 | Tempo: 2.919980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 2920 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 147000 | Tempo: 2.939980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 2940 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 148000 | Tempo: 2.959980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 2960 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 149000 | Tempo: 2.979980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 2980 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 150000 | Tempo: 2.999980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 3 ms  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 151000 | Tempo: 3.019980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 3020 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 152000 | Tempo: 3.039980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 3040 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 153000 | Tempo: 3.059980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 3060 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 154000 | Tempo: 3.079980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 3080 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 155000 | Tempo: 3.099980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 3100 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 156000 | Tempo: 3.119980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 3120 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 157000 | Tempo: 3.139980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 3140 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 158000 | Tempo: 3.159980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 3160 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 159000 | Tempo: 3.179980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 3180 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 160000 | Tempo: 3.199980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 3200 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 161000 | Tempo: 3.219980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 3220 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 162000 | Tempo: 3.239980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 3240 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 163000 | Tempo: 3.259980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 3260 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 164000 | Tempo: 3.279980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 3280 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 165000 | Tempo: 3.299980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 3300 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 166000 | Tempo: 3.319980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 3320 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 167000 | Tempo: 3.339980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 3340 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 168000 | Tempo: 3.359980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 3360 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 169000 | Tempo: 3.379980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 3380 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 170000 | Tempo: 3.399980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 3400 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 171000 | Tempo: 3.419980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 3420 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 172000 | Tempo: 3.439980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 3440 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 173000 | Tempo: 3.459980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 3460 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 174000 | Tempo: 3.479980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 3480 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 175000 | Tempo: 3.499980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 3500 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 176000 | Tempo: 3.519980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 3520 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 177000 | Tempo: 3.539980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 3540 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 178000 | Tempo: 3.559980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 3560 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 179000 | Tempo: 3.579980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 3580 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 180000 | Tempo: 3.599980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 3600 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 181000 | Tempo: 3.619980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 3620 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 182000 | Tempo: 3.639980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 3640 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 183000 | Tempo: 3.659980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 3660 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 184000 | Tempo: 3.679980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 3680 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 185000 | Tempo: 3.699980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 3700 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 186000 | Tempo: 3.719980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 3720 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 187000 | Tempo: 3.739980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 3740 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 188000 | Tempo: 3.759980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 3760 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 189000 | Tempo: 3.779980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 3780 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 190000 | Tempo: 3.799980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 3800 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 191000 | Tempo: 3.819980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 3820 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 192000 | Tempo: 3.839980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 3840 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 193000 | Tempo: 3.859980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 3860 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 194000 | Tempo: 3.879980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 3880 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 195000 | Tempo: 3.899980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 3900 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 196000 | Tempo: 3.919980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 3920 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 197000 | Tempo: 3.939980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 3940 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 198000 | Tempo: 3.959980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 3960 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 199000 | Tempo: 3.979980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 3980 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 200000 | Tempo: 3.999980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 4 ms  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 201000 | Tempo: 4.019980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 4020 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 202000 | Tempo: 4.039980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 4040 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 203000 | Tempo: 4.059980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 4060 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 204000 | Tempo: 4.079980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 4080 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 205000 | Tempo: 4.099980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 4100 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 206000 | Tempo: 4.119980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 4120 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 207000 | Tempo: 4.139980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 4140 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 208000 | Tempo: 4.159980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 4160 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 209000 | Tempo: 4.179980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 4180 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 210000 | Tempo: 4.199980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 4200 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 211000 | Tempo: 4.219980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 4220 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 212000 | Tempo: 4.239980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 4240 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 213000 | Tempo: 4.259980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 4260 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 214000 | Tempo: 4.279980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 4280 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 215000 | Tempo: 4.299980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 4300 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 216000 | Tempo: 4.319980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 4320 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 217000 | Tempo: 4.339980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 4340 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 218000 | Tempo: 4.359980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 4360 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 219000 | Tempo: 4.379980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 4380 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 220000 | Tempo: 4.399980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 4400 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 221000 | Tempo: 4.419980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 4420 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 222000 | Tempo: 4.439980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 4440 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 223000 | Tempo: 4.459980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 4460 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 224000 | Tempo: 4.479980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 4480 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 225000 | Tempo: 4.499980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 4500 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 226000 | Tempo: 4.519980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 4520 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 227000 | Tempo: 4.539980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 4540 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 228000 | Tempo: 4.559980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 4560 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 229000 | Tempo: 4.579980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 4580 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 230000 | Tempo: 4.599980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 4600 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 231000 | Tempo: 4.619980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 4620 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 232000 | Tempo: 4.639980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 4640 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 233000 | Tempo: 4.659980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 4660 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 234000 | Tempo: 4.679980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 4680 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 235000 | Tempo: 4.699980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 4700 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 236000 | Tempo: 4.719980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 4720 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 237000 | Tempo: 4.739980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 4740 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 238000 | Tempo: 4.759980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 4760 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 239000 | Tempo: 4.779980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 4780 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 240000 | Tempo: 4.799980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 4800 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 241000 | Tempo: 4.819980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 4820 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 242000 | Tempo: 4.839980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 4840 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 243000 | Tempo: 4.859980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 4860 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 244000 | Tempo: 4.879980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 4880 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 245000 | Tempo: 4.899980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 4900 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 246000 | Tempo: 4.919980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 4920 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 247000 | Tempo: 4.939980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 4940 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 248000 | Tempo: 4.959980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 4960 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 249000 | Tempo: 4.979980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 4980 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 250000 | Tempo: 4.999980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 5 ms  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 251000 | Tempo: 5.019980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 5020 us  Iteration: 1  Instance: /cpu_tb
+# ** Note: Ciclos: 252000 | Tempo: 5.039980e+06 ns | Cache: 1160 hits, 64 misses
+#    Time: 5040 us  Iteration: 1  Instance: /cpu_tb
+#  quit -f
+# End time: 19:44:09 on Nov 12,2025, Elapsed time: 0:00:09
+# Errors: 1, Warnings: 3
